@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +11,6 @@ import {
   ArrowUpRight,
   Star,
   CheckCircle,
-  AlertCircle
 } from "lucide-react";
 
 const opportunities = [
@@ -76,7 +76,7 @@ const metrics = [
 
 const DashboardPreview = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-muted/30 to-background">
+    <section id="dashboard" className="py-20 bg-gradient-to-br from-muted/30 to-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-4">
@@ -121,10 +121,12 @@ const DashboardPreview = () => {
               <CardTitle className="text-xl font-semibold text-foreground">
                 High-Priority Opportunities
               </CardTitle>
-              <Button variant="outline" size="sm">
-                View All
-                <ArrowUpRight className="w-4 h-4 ml-2" />
-              </Button>
+              <Link to="/search">
+                <Button variant="outline" size="sm">
+                  View All
+                  <ArrowUpRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
             </CardHeader>
             <CardContent className="space-y-4">
               {opportunities.map((opp, index) => (
@@ -161,9 +163,11 @@ const DashboardPreview = () => {
                       <Clock className="w-4 h-4 mr-1" />
                       {Math.floor(Math.random() * 30) + 5} days left
                     </div>
-                    <Button variant="premium" size="sm">
-                      Analyze
-                    </Button>
+                    <Link to="/search">
+                      <Button variant="premium" size="sm">
+                        Analyze
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -215,9 +219,11 @@ const DashboardPreview = () => {
               </div>
               
               <div className="pt-4">
-                <Button variant="outline" size="sm" className="w-full">
-                  View All Activity
-                </Button>
+                <Link to="/search">
+                  <Button variant="outline" size="sm" className="w-full">
+                    View All Activity
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>

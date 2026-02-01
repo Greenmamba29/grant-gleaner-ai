@@ -59,7 +59,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-20 bg-card">
+    <section id="features" className="py-20 bg-card">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <Badge variant="secondary" className="mb-4">

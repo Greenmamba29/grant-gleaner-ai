@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -213,11 +214,13 @@ const OperationalExcellence = () => {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <Button variant="hero" size="lg" className="px-8">
-            <Target className="w-5 h-5 mr-2" />
-            Experience Operational Excellence
-            <ArrowUpRight className="w-5 h-5 ml-2" />
-          </Button>
+          <Link to="/search">
+            <Button variant="hero" size="lg" className="px-8">
+              <Target className="w-5 h-5 mr-2" />
+              Experience Operational Excellence
+              <ArrowUpRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Target, DollarSign, Clock, Shield } from "lucide-react";
@@ -53,10 +54,12 @@ const HeroSection = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="lg" className="text-lg px-8 py-6">
-                <Target className="w-5 h-5 mr-2" />
-                Start Hunting Grants
-              </Button>
+              <Link to="/search">
+                <Button variant="hero" size="lg" className="text-lg px-8 py-6">
+                  <Target className="w-5 h-5 mr-2" />
+                  Start Hunting Grants
+                </Button>
+              </Link>
               <Button variant="outline" size="lg" className="text-lg px-8 py-6">
                 <DollarSign className="w-5 h-5 mr-2" />
                 View Success Stories

@@ -2,3 +2,9 @@ project_id = "jnzymqfokayosrtuhntt"
 
 [functions.perplexity-search]
 verify_jwt = false
+
+[functions.qualify-opportunity]
+verify_jwt = false
+
+[functions.perplexity-write]
+verify_jwt = false

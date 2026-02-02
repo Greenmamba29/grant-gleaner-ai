@@ -15,9 +15,23 @@ interface GrantSearchBarProps {
     fundingRange?: string;
     deadline?: string;
     sector?: string;
+    grantType?: string;
   }) => void;
   isLoading: boolean;
 }
+
+const GRANT_TYPES = [
+  { value: "sbir-sttr", label: "SBIR/STTR" },
+  { value: "nsf", label: "NSF Research Grants" },
+  { value: "nih", label: "NIH Funding" },
+  { value: "doe", label: "DOE Energy Grants" },
+  { value: "dod", label: "DoD/DARPA" },
+  { value: "usda", label: "USDA Agriculture" },
+  { value: "epa", label: "EPA Environmental" },
+  { value: "foundation", label: "Private Foundations" },
+  { value: "state-local", label: "State & Local" },
+  { value: "other", label: "Other (specify)" },
+];
 
 const GrantSearchBar = ({ onSearch, isLoading }: GrantSearchBarProps) => {
   const [query, setQuery] = useState("");
@@ -25,16 +39,28 @@ const GrantSearchBar = ({ onSearch, isLoading }: GrantSearchBarProps) => {
   const [fundingRange, setFundingRange] = useState<string>("");
   const [deadline, setDeadline] = useState<string>("");
   const [sector, setSector] = useState<string>("");
+  const [grantType, setGrantType] = useState<string>("");
+  const [customGrantType, setCustomGrantType] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!query.trim()) return;
     
+    const effectiveGrantType = grantType === "other" ? customGrantType : grantType;
+    
     onSearch(query, {
       fundingRange: fundingRange || undefined,
       deadline: deadline || undefined,
       sector: sector || undefined,
+      grantType: effectiveGrantType || undefined,
     });
+  };
+
+  const handleGrantTypeChange = (value: string) => {
+    setGrantType(value);
+    if (value !== "other") {
+      setCustomGrantType("");
+    }
   };
 
   return (
@@ -80,6 +106,37 @@ const GrantSearchBar = ({ onSearch, isLoading }: GrantSearchBarProps) => {
 
       {showFilters && (
         <div className="flex flex-wrap gap-4 p-4 bg-card border border-border rounded-lg animate-fade-in">
+          {/* Grant Type Dropdown */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-muted-foreground">Grant Type</label>
+            <Select value={grantType} onValueChange={handleGrantTypeChange}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Select type" />
+              </SelectTrigger>
+              <SelectContent>
+                {GRANT_TYPES.map((type) => (
+                  <SelectItem key={type.value} value={type.value}>
+                    {type.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Custom Grant Type Input (shown when "Other" is selected) */}
+          {grantType === "other" && (
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-muted-foreground">Specify Grant Type</label>
+              <Input
+                type="text"
+                value={customGrantType}
+                onChange={(e) => setCustomGrantType(e.target.value)}
+                placeholder="e.g., International development"
+                className="w-48"
+              />
+            </div>
+          )}
+
           <div className="space-y-2">
             <label className="text-sm font-medium text-muted-foreground">Funding Range</label>
             <Select value={fundingRange} onValueChange={setFundingRange}>
